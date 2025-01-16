@@ -1,8 +1,64 @@
-<html>
-    <head>
-        <title>Hello World</title>
-    </head>
-    <body>
-        Hello World version 2
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namaz Timings</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<script>
+    (async () => {
+        let resp = await fetch("https://api.sunrisesunset.io/json?lat=28.6919754&lng=77.2714632&time_format=24");
+        let js = await resp.json();
+        document.getElementById('maghrib_time').innerHTML = js.results.sunset.substring(0, 5);
+    })();
+</script>
+<body>
+    <h1>Jamia Masjid Namaz Timings</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Namaz</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fajr</td>
+                <td>6:50</td>
+            </tr>
+            <tr>
+                <td>Zohar</td>
+                <td>1:30</td>
+            </tr>
+            <tr>
+                <td>Asr</td>
+                <td>4:30</td>
+            </tr>
+            <tr>
+                <td>Maghrib</td>
+                <td id="maghrib_time"></td>
+            </tr>
+            <tr>
+                <td>Isha</td>
+                <td>7:45</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
 </html>
